@@ -2,7 +2,6 @@ import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
 import nodemailer from "nodemailer"
-import * as Process from "process";
 
 const PORT = 4444
 
@@ -16,8 +15,8 @@ app.use(express.json())
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: Process.env.EMAIL,
-        pass: Process.env.APP_PASSWORD
+        user: process.env.EMAIL,
+        pass: process.env.APP_PASSWORD
     }
 });
 
@@ -27,22 +26,23 @@ app.get("/", (req, res) => {
 
 app.post("/send-email", async (req, res) => {
 
-    // const mailOptions = {
-    //     from: Process.env.EMAIL,
-    //     to: Process.env.EMAIL,
-    //     subject: 'portfolio mail',
-    //     text: '',
-    //     html: `<h1>Email test</h1>`
-    // };
-    //
-    // await transporter.sendMail(mailOptions, function (error, info) {
-    //     if (error) {
-    //         console.log(error);
-    //     } else {
-    //         console.log('Email sent: ' + info.response);
-    //         // do something useful
-    //     }
-    // });
+    const {message, name} = req.body
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: process.env.EMAIL,
+        subject: 'portfolio mail',
+        text: '',
+        html: `<h1>{name}</h1> <h2>{message}</h2>`
+    };
+
+    await transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            // do something useful
+        }
+    });
 
     res.send(req.body)
 
