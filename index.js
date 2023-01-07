@@ -18,8 +18,8 @@ const transporter = nodemailer.createTransport({
     secure: true,
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL,
-        pass: process.env.APP_PASSWORD
+        user: "kirjkirjkirj@gmail.com",
+        pass: "ipokpdytcghcebya"
     }
 });
 
@@ -30,25 +30,16 @@ app.get("/", (req, res) => {
 app.post("/send-email", async (req, res) => {
 
     const {message, name} = req.body
+
     const mailOptions = {
-        from: process.env.EMAIL,
-        to: process.env.EMAIL,
+        from: "kirjkirjkirj@gmail.com",
+        to: "kirjkirjkirj@gmail.com",
         subject: 'portfolio mail',
         text: '',
-        html: `<h1>{name}</h1> <h2>{message}</h2>`
+        html: `<h1>{message}</h1> <h2>{name}</h2>`
     };
 
-    await transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-            // do something useful
-        }
-    });
-
-    res.send(req.body)
-
+    await transporter.sendMail(mailOptions);
 })
 
 app.listen(PORT, () => {
