@@ -27,22 +27,25 @@ app.get("/", (req, res) => {
 
 app.post("/send-email", async (req, res) => {
 
-    const mailOptions = {
-        from: Process.env.EMAIL,
-        to: Process.env.EMAIL,
-        subject: 'portfolio mail',
-        text: '',
-        html: `<h1>Email test</h1>`
-    };
+    // const mailOptions = {
+    //     from: Process.env.EMAIL,
+    //     to: Process.env.EMAIL,
+    //     subject: 'portfolio mail',
+    //     text: '',
+    //     html: `<h1>Email test</h1>`
+    // };
+    //
+    // await transporter.sendMail(mailOptions, function (error, info) {
+    //     if (error) {
+    //         console.log(error);
+    //     } else {
+    //         console.log('Email sent: ' + info.response);
+    //         // do something useful
+    //     }
+    // });
 
-    await transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-            // do something useful
-        }
-    });
+    res.send(req.body)
+
 })
 
 app.listen(PORT, () => {
