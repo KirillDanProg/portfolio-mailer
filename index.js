@@ -32,11 +32,11 @@ app.post("/send-email", async (req, res) => {
     const {message, name} = req.body
 
     const mailOptions = {
-        from: "kirjkirjkirj@gmail.com",
-        to: "kirjkirjkirj@gmail.com",
-        subject: 'portfolio mail',
+        from: process.env.APP_EMAIL,
+        to: process.env.APP_EMAIL,
+        subject: 'Portfolio Request',
         text: '',
-        html: `<h1>{message}</h1> <h2>{name}</h2>`
+        html: `<h1>${message}</h1> <h2>${name}</h2>`
     };
 
     await transporter.sendMail(mailOptions);
