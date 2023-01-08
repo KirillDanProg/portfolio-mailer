@@ -36,7 +36,11 @@ app.post("/send-email", async (req, res) => {
         to: process.env.APP_EMAIL,
         subject: 'Portfolio Request',
         text: '',
-        html: `<h1>${message}</h1> <h2>${name}</h2>`
+        html: `
+<h1>${subject}</h1>
+ <h2>${name}</h2>
+<h2>${email}</h2>
+<h2>${message}</h2>`
     };
 
     await transporter.sendMail(mailOptions);
