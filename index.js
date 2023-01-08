@@ -40,7 +40,7 @@ app.post("/send-email", async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    res.send("ok")
+    res.send(req.body)
 })
 
 app.listen(PORT, () => {
