@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
 app.post("/send-email", async (req, res) => {
 
-    const {message, name} = req.body
+    const {message, name, subject, email} = req.body
 
     const mailOptions = {
         from: process.env.APP_EMAIL,
@@ -40,7 +40,7 @@ app.post("/send-email", async (req, res) => {
 <h1>${subject}</h1>
  <h2>${name}</h2>
 <h2>${email}</h2>
-<h2>${message}</h2>`
+<h2>${message} || ""</h2>`
     };
 
     await transporter.sendMail(mailOptions);
